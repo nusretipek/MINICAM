@@ -1,0 +1,19 @@
+name = "config_test"
+
+[[steps]]
+name = "pan_pos_tilt_down"
+delay_sec = 10
+ptz.type = "absolute"
+ptz.pan = 0.5
+ptz.tilt = 0.5
+ptz.speed_pan = 0.5
+ptz.speed_tilt = 0.5
+
+[[steps]]
+name = "pan_neg_tilt_down"
+delay_sec = 10
+ptz.type = "absolute"
+ptz.pan = -0.5
+ptz.tilt = 0.5
+ptz.speed_pan = 0.3
+ptz.speed_tilt = 0.3

@@ -1,0 +1,18 @@
+[camera]
+ips = ["192.168.254.3"]
+username = "admin"
+stream = "sub"
+rtsp_port = 554
+onvif_port = 80
+onvif_ips = ["192.168.254.3"]
+
+[app]
+window_title = "BIOVISM CAM RECORDER"
+save_dir = "DATA"
+fps = 20
+display_main_fps = 2
+nmcli_uuid = "47feea8c-e87b-4bb5-955a-4e6aef53eef3"
+nmcli_name = "Wired-NVR"
+
+[manual]
+fps = [1, 2, 4, 6, 8, 10, 12, 15, 16, 18, 20, 22, 25]

@@ -1,0 +1,12 @@
+[project]
+name = "cam-gui"
+version = "0.1.0"
+description = "Simple Hikvision RTSP viewer GUI"
+requires-python = ">=3.11"
+dependencies = [
+  "opencv-python",
+  "Pillow",
+  "requests",
+  "onvif-zeep",
+  "cairosvg",
+]
