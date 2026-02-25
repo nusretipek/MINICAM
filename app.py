@@ -382,13 +382,13 @@ class App(tk.Tk):
             msg_var.set("Checking…")
 
             def worker() -> None:
-                ok = self._test_onvif_auth(pwd)
+                ok, err = self._test_onvif_auth(pwd)
                 if ok:
                     self.cam_cfg.password = pwd
                     self.after(0, dlg.destroy)
                     self.after(0, self._unlock_app)
                 else:
-                    self.after(0, lambda: msg_var.set("Invalid password"))
+                    self.after(0, lambda: msg_var.set(err or "Invalid password"))
 
             threading.Thread(target=worker, daemon=True).start()
 
@@ -396,7 +396,7 @@ class App(tk.Tk):
         pw_entry.focus_set()
         dlg.bind("<Return>", lambda _event: try_unlock())
 
-    def _test_onvif_auth(self, pwd: str) -> bool:
+    def _test_onvif_auth(self, pwd: str) -> tuple[bool, str]:
         try:
             ip = self._onvif_targets()[0]
             session = Session()
@@ -406,9 +406,12 @@ class App(tk.Tk):
             cam = ONVIFCamera(ip, self.cam_cfg.onvif_port, self.cam_cfg.username, pwd, transport=transport)
             media = cam.create_media_service()
             media.GetProfiles()
-            return True
-        except Exception:
-            return False
+            return True, ""
+        except Exception as e:
+            msg = str(e).strip()
+            if not msg:
+                msg = type(e).__name__
+            return False, msg
 
     def _set_window_icon(self) -> None:
         logo_path = Path("logo.svg")
